@@ -20,15 +20,15 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS lancamentos (
 conn.commit()
 
 # Centraliza a janela
-janelaLançamento = ctk.CTk()
-janelaLançamento.title('Lançamento mensal'.upper())
+janelaLancamento = ctk.CTk()
+janelaLancamento.title('Lançamento mensal'.upper())
 largura = 300
 altura = 300
-largura_tela = janelaLançamento.winfo_screenwidth()
-altura_tela = janelaLançamento.winfo_screenheight()
+largura_tela = janelaLancamento.winfo_screenwidth()
+altura_tela = janelaLancamento.winfo_screenheight()
 posx = largura_tela/2 - largura/2
 posy = altura_tela/2 - altura/2
-janelaLançamento.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))
+janelaLancamento.geometry('%dx%d+%d+%d' % (largura, altura, posx, posy))
 
 bold_font = ctk.CTkFont(family='urw geometric', size=15, weight='bold')
 
@@ -83,10 +83,10 @@ def abrir_calendario(entry):
 def formatar_valor(valor_documento):
     def callback(*args):
         valor = var_valor.get()
-        valor = valor.replace(",", "").replace(".", "")
+        valor = valor.replace(".", ",").replace(".", "")
         valor = valor.zfill(3)
-        valor = f'{int(valor[:-2]):,}.{valor[-2:]}'
-        valor = valor.replace(",", ".")
+        valor = f'{int(valor[:-1]):,}.{valor[-1:]}'
+        valor = valor.replace(".", ",")
         var_valor.set(valor)
 
     var_valor = tk.StringVar()
@@ -212,7 +212,7 @@ def botaoAdd():
   salvar_lancamento.place(x=200, y=350)
 
 # BOTAO DE NOVO LANÇAMENTO
-btnNovo = ctk.CTkButton(janelaLançamento, text='novo'.upper(),
+btnNovo = ctk.CTkButton(janelaLancamento, text='novo'.upper(),
                         fg_color='#40a240',
                         hover_color='#466646',
                         text_color='#000',
@@ -221,7 +221,7 @@ btnNovo.pack(padx=10, pady=10)
 
 
 # BOTAO PARA GERAR RELATORIO MENSAL
-btnRelatorio = ctk.CTkButton(janelaLançamento, text='relatório'.upper(),
+btnRelatorio = ctk.CTkButton(janelaLancamento, text='relatório'.upper(),
                         fg_color='#40a240',
                         hover_color='#466646',
                         text_color='#000',
@@ -229,4 +229,4 @@ btnRelatorio = ctk.CTkButton(janelaLançamento, text='relatório'.upper(),
 btnRelatorio.pack(padx=10, pady=10)
 
 def abrir_tela_lancamento():
-  janelaLançamento.mainloop()
+  janelaLancamento.mainloop()
